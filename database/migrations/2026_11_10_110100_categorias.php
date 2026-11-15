@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Tipo de prenda o artículo: camisetas, shorts, calzado, accesorios deportivos.
         Schema::create('categorias', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('descripcion');                 
+            $table->string('nombre', 100)->unique();   // no se repite la categoría
+            $table->string('descripcion')->nullable(); // explicación breve, opcional
             $table->timestamps();
         });
     }

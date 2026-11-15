@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Deporte para el que sirve el producto: fútbol, running, basketball, gimnasio.
         Schema::create('disciplinas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre')->unique();
-            $table->string('descripcion');                 
+            $table->string('nombre', 100)->unique();   // no se repite la disciplina
+            $table->string('descripcion')->nullable(); // explicación breve, opcional
             $table->timestamps();
         });
     }

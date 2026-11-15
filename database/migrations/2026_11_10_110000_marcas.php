@@ -11,11 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Marcas de ropa deportiva (Nike, Adidas, Puma...).
         Schema::create('marcas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre')->unique();
-            $table->string('logo')->nullable();               
-            $table->boolean('activa')->default(true);    
+            $table->string('nombre', 100)->unique();   // no se repite la misma marca
+            $table->string('logo')->nullable();        // ruta de la imagen, puede quedar vacía
+            $table->boolean('activa')->default(true);  // si la marca se muestra en la tienda
             $table->timestamps();
         });
     }

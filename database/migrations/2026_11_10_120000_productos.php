@@ -11,26 +11,28 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Catálogo de productos. La talla, el color y el stock viven en variantes_productos.
         Schema::create('productos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('tienda_id');
-            $table->unsignedBigInteger('marca_id');
-            $table->unsignedBigInteger('categoria_id');
-            $table->unsignedBigInteger('disciplina_id');
-            $table->string('nombre');               
-            $table->string('slug')->unique(); 
-            $table->text('descripcion')->nullable(); 
-            $table->string('genero'); 
-            $table->decimal('precio',10,2);
-            $table->decimal('precio_oferta',10,2)->nullable();
-            $table->boolean('destacado')->default(false);
-            $table->boolean('activo')->default(true);    
+
+            // Si se intenta borrar una tienda, marca, categoría o disciplina
+            // que tiene productos, MySQL lo rechaza (restrict).
+            $table->foreignId('tienda_id')->constrained('tiendas')->restrictOnDelete();
+            $table->foreignId('marca_id')->constrained('marcas')->restrictOnDelete();
+            $table->foreignId('categoria_id')->constrained('categorias')->restrictOnDelete();
+            $table->foreignId('disciplina_id')->constrained('disciplinas')->restrictOnDelete();
+
+            $table->string('nombre', 150);
+            $table->string('slug', 180)->unique();           // nombre para la URL, único
+            $table->text('descripcion')->nullable();
+            $table->string('genero', 20);                    // hombre, mujer, unisex, nino, nina
+            $table->decimal('precio', 10, 2);                // dinero siempre en decimal
+            $table->decimal('precio_oferta', 10, 2)->nullable();
+            $table->boolean('destacado')->default(false);    // aparece en el Home
+            $table->boolean('activo')->default(true);        // si se muestra en la tienda
             $table->timestamps();
 
-            $table->foreign('tienda_id')->references('id')->on('tiendas'); 
-            $table->foreign('marca_id')->references('id')->on('marcas'); 
-            $table->foreign('categoria_id')->references('id')->on('categorias'); 
-            $table->foreign('disciplina_id')->references('id')->on('disciplinas'); 
+            $table->index('nombre');                         // acelera la búsqueda por nombre
         });
     }
 

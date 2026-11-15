@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('imagenes_productos', function (Blueprint $table) {
+        // Galería de fotos de cada producto. Solo se guarda la ruta, no la imagen.
+        Schema::create('imagenes_producto', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('producto_id');
-            $table->string('ruta');               
-            $table->boolean('es_principal')->default(false); 
-            $table->string('orden');   
-            $table->timestamps();
 
-            $table->foreign('producto_id')->references('id')->on('productos'); 
+            // Si se borra el producto, se borran también sus fotos (cascade).
+            $table->foreignId('producto_id')->constrained('productos')->cascadeOnDelete();
+
+            $table->string('ruta');
+            $table->boolean('es_principal')->default(false);    // foto que se ve en las tarjetas
+            $table->unsignedSmallInteger('orden')->default(0);  // posición en la galería (número, no texto)
+            $table->timestamps();
         });
     }
 
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('imagenes_productos');
+        Schema::dropIfExists('imagenes_producto');
     }
 };
