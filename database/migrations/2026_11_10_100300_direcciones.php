@@ -13,17 +13,17 @@ return new class extends Migration
     {
         Schema::create('direcciones', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('alias');               
+            //si se elimina el registro del usuario, ya no es necesario conocer su direccion domiciliaria
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();  //
+            $table->string('alias',60);               
             $table->string('departamento'); 
             $table->string('municipio'); 
             $table->string('direccion_detalle'); 
-            $table->string('referencia');
-            $table->string('telefono');
-            $table->boolean('es_principal')->default(false);    
+            $table->string('referencia')->nullable();   //referencia opcional
+            $table->string('telefono',20);
+            $table->boolean('es_principal')->default(false);  //por defecto no toda sucursal es la tienda principal  
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users'); 
+ 
         });
     }
 

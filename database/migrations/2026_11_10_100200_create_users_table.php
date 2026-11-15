@@ -13,18 +13,18 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->unsignedBigInteger('role_id');
-            $table->string('telefono');
-            $table->string('rtn')->nullable();
-            $table->string('email')->unique();
+            $table->string('name')->unique();  //nombre unico
+            //se impide eliminar un rol que aun tenga usuarios registrados
+            $table->foreignId('role_id')->constrained('roles')->restrictOnDelete();  
+            $table->string('telefono',20)->nullable();  //numero telefonico opcional
+            $table->string('rtn',20)->nullable();     //rtn opcional
+            $table->string('email')->unique();      //correo electronico del usuario
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('activo')->default(true);
+            $table->boolean('activo')->default(true);  //por defecto cada usuario se encuentra activo
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('role_id')->references('id')->on('roles'); 
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

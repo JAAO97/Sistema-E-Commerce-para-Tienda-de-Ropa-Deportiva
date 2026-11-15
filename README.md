@@ -1,58 +1,49 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Sistema E-commerce para tienda deportiva
 
-## About Laravel
+A continuación se presenta una guía para el proyecto de desarrollo de un portal web para una cadena de tiendas de ropa deportiva. El sistema permite administrar a profundidad el inventario de todas las tiendas y sucursales registradas, asi como administrar los empleados y usuarios.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+A continuación se presenta los requisitos y pasos de instalación para ejecutar el proyecto.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Requisitos
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+ - Xampp: 8.5.12
+ - PHP: 8.5.12 (Implementado en Xampp)
+ - MySQL: 5.2.3 (Implementado en Xampp)
+ - MariaDB-Server: 10.11.16 (Implementado en Xampp)
+ - Composer: 2.11.1
 
-## Learning Laravel
+## Instrucciones
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Enlace de descarga de Xampp:
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+ > https://www.apachefriends.org/download.html
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+Dsecargar y ejecutar el instalador de composer:
 
-## Agentic Development
+ > https://getcomposer.org/Composer-Setup.exe
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Si se utiliza Xampp, Windows no reconocerá la carpeta PHP dentro de Xampp, por tanto no será posible utilizar comandos PHP en la terminal.
 
-```bash
-composer require laravel/boost --dev
+Primero se debe agregar la ruta de la carpeta PHP dentro de Xampp a las variables de entorno. En PowerShell escribir el siguiente comando:
 
-php artisan boost:install
-```
+ > [Environment]::SetEnvironmentVariable("Path", $env:Path + ";C:\xampp\php", "User")
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Una vez agregada la ruta de PHP a las varibles de entorno, descargue el repositorio del proyecto y encienda los modulos de Apache y MySQL en Xampp.
 
-## Contributing
+Copiar la plantilla de configuración de ambiente de .env.example a un nuevo archivo .env .
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Una vez se terminen las configuraciones correspondientes, abrir una terminal en la carpeta del proyecto. Ingresar el siguiente comando para crear la base de datos y realizar las migraciones:
 
-## Code of Conduct
+> php artisan migrate
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Ingresar YES para permitir que Laravel cree la base de datos.
 
-## Security Vulnerabilities
+>  WARN  The database 'tienda_de_ropa_deportiva' does not exist on the 'mysql' connection.  
+> Would you like to create it? (yes/no) [yes]
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Una vez creada la base de datos y realizadas las migraciones, se debe levantar el servidor mediante el siguiente comando:
 
-## License
+> php artisan serve
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Por último, ingresar mediante el navegador a **http://127.0.0.1:8000**.

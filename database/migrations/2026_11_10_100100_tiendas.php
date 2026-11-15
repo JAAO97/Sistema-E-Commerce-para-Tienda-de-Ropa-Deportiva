@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('tiendas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre'); 
-            $table->string('rtn');               
-            $table->text('direccion'); 
-            $table->string('ciudad'); 
-            $table->string('telefono'); 
-            $table->boolean('activa');    
+            $table->string('nombre',100)->unique();  //nombre unico para cada tienda
+            $table->string('rtn');   //registro tributario nacional registrado a la tienda            
+            $table->text('direccion');   //direccion fisica de la tienda
+            $table->string('ciudad');    //ciudad en que se ubica la tienda
+            $table->string('telefono')->nullable();  //numero telefonico opcional
+            $table->boolean('activa')->default(true);  //por defecto cada tienda esta activa  
             $table->timestamps();
         });
     }
