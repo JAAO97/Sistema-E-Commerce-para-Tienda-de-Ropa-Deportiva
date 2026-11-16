@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('factura_detalles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('factura_id');
-            $table->string('descripcion');               
-            $table->integer('cantidad'); 
-            $table->decimal('precio_unitario',10,2);
-            $table->decimal('subtotal',10,2);   
+            $table->foreignId('factura_id')->constrained('facturas')->onDelete('restrict');
+            $table->foreignId('variante_id')->nullable()->constrained('variantes_productos')->onDelete('restrict');
+            $table->string('descripcion', 200);               
+            $table->unsignedInteger('cantidad');
+            $table->decimal('precio_unitario', 10, 2);
+            $table->decimal('subtotal', 10, 2);   
             $table->timestamps();
 
-            $table->foreign('factura_id')->references('id')->on('facturas'); 
         });
     }
 

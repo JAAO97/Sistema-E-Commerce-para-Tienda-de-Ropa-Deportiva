@@ -13,16 +13,15 @@ return new class extends Migration
     {
         Schema::create('cai_rangos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('tienda_id');
-            $table->string('cai')->unique();               
-            $table->integer('rango_inicial'); 
-            $table->integer('rango_final'); 
-            $table->integer('numero_actual'); 
-            $table->dateTime('fecha_limite_emision'); 
+            $table->foreignId('tienda_id')->constrained('tiendas')->onDelete('restrict');
+            $table->string('cai', 50)->unique();               
+            $table->string('rango_inicial', 25); 
+            $table->string('rango_final', 25); 
+            $table->unsignedBigInteger('numero_actual'); 
+            $table->date('fecha_limite_emision'); 
             $table->boolean('activo')->default(true);  
             $table->timestamps();
 
-            $table->foreign('tienda_id')->references('id')->on('tiendas'); 
         });
     }
 
