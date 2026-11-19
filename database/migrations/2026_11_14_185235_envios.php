@@ -16,8 +16,8 @@ return new class extends Migration
             $table->unsignedBigInteger('pedido_id')->unique();
             $table->string('estado')->default('PENDIENTE');               
             $table->string('numero_guia')->nullable(); 
-            $table->dateTime('fecha_envio');
-            $table->dateTime('fecha_entrega');   
+            $table->dateTime('fecha_envio')->nullable();
+            $table->dateTime('fecha_entrega')->nullable();   
             $table->timestamps();
 
             $table->foreign('pedido_id')->references('id')->on('pedidos'); 

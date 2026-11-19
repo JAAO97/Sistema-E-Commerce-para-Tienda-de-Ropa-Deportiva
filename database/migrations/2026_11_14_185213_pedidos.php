@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('tienda_id');
             $table->unsignedBigInteger('direccion_id')->nullable();
-            $table->string('numero_pedido');               
+            $table->string('numero_pedido',30)->unique();               
             $table->string('tipo_entrega'); 
             $table->string('estado')->default('PENDIENTE');
             $table->decimal('subtotal',10,2)->default(0.00);

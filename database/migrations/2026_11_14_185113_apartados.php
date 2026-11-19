@@ -19,11 +19,11 @@ return new class extends Migration
             $table->integer('cantidad')->default(1);
             $table->dateTime('fecha_apartado');  
             $table->dateTime('fecha_expiracion');            
-            $table->string('estado')->default('ACTIVO');    
+            $table->string('estado',20)->default('ACTIVO');    
             $table->timestamps();
             
-            $table->foreign('user_id')->references('id')->on('users'); 
-            $table->foreign('variante_id')->references('id')->on('variantes_productos'); 
+            $table->foreign('user_id', 'fk_apartados_users')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('variante_id', 'fk_apartados_variantes')->references('id')->on('variantes_productos')->onDelete('restrict');
         });
     }
 

@@ -14,10 +14,12 @@ return new class extends Migration
     {
         Schema::create('tallas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('tipo');               
-            $table->string('orden');   
+            $table->string('nombre', 30);
+            $table->string('tipo', 20);
+            $table->unsignedSmallInteger('orden')->default(0);
             $table->timestamps();
+
+            $table->unique(['nombre', 'tipo'], 'uq_tallas_nombre_tipo');
         });
     }
 

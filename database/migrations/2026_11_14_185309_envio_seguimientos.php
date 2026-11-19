@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('envio_seguimientos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('envio_id');
-            $table->string('estado');               
-            $table->string('comentario')->nullable(); 
+            $table->string('estado',20);               
+            $table->string('comentario',255)->nullable(); 
             $table->dateTime('fecha');   
             $table->timestamps();
 

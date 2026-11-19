@@ -13,11 +13,9 @@ return new class extends Migration
     {
         Schema::create('carritos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('estado')->default('ACTIVO');               
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+            $table->string('estado', 20)->default('activo');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users'); 
         });
     }
 

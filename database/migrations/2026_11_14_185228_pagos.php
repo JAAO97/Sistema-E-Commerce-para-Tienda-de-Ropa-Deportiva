@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('pagos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pedido_id');
-            $table->string('metodo');               
+            $table->string('metodo',30);               
             $table->decimal('monto',10,2); 
             $table->string('estado')->default('PENDIENTE');
             $table->string('referencia')->nullable();
-            $table->dateTime('fecha_pago');   
+            $table->dateTime('fecha_pago')->nullable();   
             $table->timestamps();
 
             $table->foreign('pedido_id')->references('id')->on('pedidos'); 

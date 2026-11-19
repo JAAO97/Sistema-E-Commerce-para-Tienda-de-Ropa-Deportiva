@@ -20,10 +20,11 @@ return new class extends Migration
             $table->string('municipio'); 
             $table->string('direccion_detalle'); 
             $table->string('referencia')->nullable();   //referencia opcional
-            $table->string('telefono',20);
+            $table->string('telefono',20)->nullable();
             $table->boolean('es_principal')->default(false);  //por defecto no toda sucursal es la tienda principal  
             $table->timestamps();
  
+            $table->foreign('user_id', 'fk_direcciones_users')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

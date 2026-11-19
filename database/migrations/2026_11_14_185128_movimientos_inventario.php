@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('variante_id');
             $table->unsignedBigInteger('user_id');
-            $table->string('tipo');               
+            $table->string('tipo', 20);               
             $table->integer('cantidad'); 
-            $table->string('motivo');   
+            $table->string('motivo', 150)->nullable();   
             $table->timestamps();
 
-            $table->foreign('variante_id')->references('id')->on('variantes_productos'); 
-            $table->foreign('user_id')->references('id')->on('users'); 
+            $table->foreign('variante_id', 'fk_movimientos_variantes')->references('id')->on('variantes_productos')->onDelete('restrict');
+            $table->foreign('user_id', 'fk_movimientos_users')->references('id')->on('users')->onDelete('restrict'); 
         });
     }
 
